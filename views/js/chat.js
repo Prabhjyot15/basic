@@ -28,32 +28,56 @@ socket.on('connect', function () {
     }
   });
 });
+
+
 socket.on('chatHistory',function(data){
   //console.log("REACHED CHAT HISTORY")
-  var template = jQuery('#message-template').html();
+  var template;
   //console.log(data)
   data.forEach(function (arrayItem) {
-    //console.log(arrayItem)
+    if(arrayItem.url)
+    { template = jQuery('#location-message-template').html();
+      var html = Mustache.render(template, {
+        from: arrayItem.from,
+        image:arrayItem.image,
+        url:arrayItem.url,
+        createdAt:arrayItem.createdAt
+
+        // createdAt: formattedTime
+       })
+    }
+    if(arrayItem.file)
+    {
+       template = jQuery('#file-message-template').html();
+      var html = Mustache.render(template, {
+        from: arrayItem.from,
+        image:arrayItem.image,
+        file:arrayItem.file,
+        fileName:arrayItem.filename,
+        createdAt:arrayItem.createdAt
+
+        // createdAt: formattedTime
+       })
+    }
+    if(arrayItem.text){
+      template = jQuery('#message-template').html();
+      var html = Mustache.render(template, {
+        from: arrayItem.from,
+        image:arrayItem.image,
+        text:arrayItem.text,
+        createdAt:arrayItem.createdAt
+
+        // createdAt: formattedTime
+       })
+    }
     //console.log(arrayItem.from)
-    //console.log(arrayItem.text)
-    var html = Mustache.render(template, {
-      
-      from: arrayItem.from,
-      image:arrayItem.image,
-      text: arrayItem.text,
-      createdAt:arrayItem.createdAt
-      
-      // createdAt: formattedTime
-     })
+
     jQuery('#messages').append(html);
     scrollToBottom();
  })
-  
+
 });
 
-socket.on('disconnect', function () {
-  console.log('Disconnected from server');
-});
 
 socket.on('updateUserList', function (users) {
   var ol = jQuery('<ol></ol>');
@@ -146,7 +170,7 @@ locationButton.on('click', function () {
 });
 
 $('input[type="file"]').change(function(e){
-  
+
  // var fileName = document.forms["form"]["add-file"].files[0]
   //console.log('The file "' + fileName +  '" has been selected.');
   //console.log(file)
@@ -155,9 +179,9 @@ $('input[type="file"]').change(function(e){
  // $('#add-file').on('change', function(e){
     var data = e.originalEvent.target.files[0];
     console.log("reached")
-    readThenSendFile(data);      
+    readThenSendFile(data);
   });
-  
+
   function readThenSendFile(data){
    console.log(data)
     var reader = new FileReader();

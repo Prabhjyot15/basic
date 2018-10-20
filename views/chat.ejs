@@ -18,7 +18,7 @@
   </div>
 
   <div class="chat__main">
-      <a href="/logout" style="margin-right: 20px" >Logout</a>
+      <a href="/logout" style="margin-right: 20px" class="button" >Logout</a>
     <ol id="messages" class="chat__messages"></ol>
 
     <div class="chat__footer">
@@ -41,8 +41,9 @@
         <span>{{createdAt}}</span>
       </div>
       <div class="message__body">
-        <p>{{text}}</p>
+        <p id="a">{{text}}</p>
       </div>
+
     </li>
   </script>
 
@@ -82,6 +83,7 @@
   <script src="/js/libs/mustache.js"></script>
   <script src="/js/libs/deparam.js"></script>
   <script src="/js/chat.js"></script>
+
 </body>
 
 </html>

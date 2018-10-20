@@ -1,5 +1,6 @@
 <% include ./partials/header %>
 <link rel="stylesheet" href="Log.css" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Courgette|Handlee|Philosopher|Permanent+Marker|Rock+Salt" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -8,15 +9,15 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
+        <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="slideshow.html"><span class="glyphicon glyphicon-globe"></span>verHere</a>
+      <a style="text-align: center;" class="navbar-brand">  GroupChat</a>
     </div>
     <div class="collapse navbar-collapse myNavbar">
       <ul class="nav navbar-nav">
           <li ><a href="/">Home</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right myNavbar">  
+      <ul class="nav navbar-nav navbar-right myNavbar">
           <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
     </ul>
   </div>
@@ -25,8 +26,8 @@
     <div class="row">
         <div class="form_bg">
             <form action="/login" method="post">
-			   
-                 <h2 id="A" class="text-center">Login</h2>
+
+                 <h2 id="A" class="text-center" style="color:black;font-family:'Courgette',cursive">Login</h2>
                 <br/>
                 <div class="form-group">
                     <input type="email" class="form-control" id="userid" placeholder="Email"name="username" required>
@@ -38,8 +39,9 @@
                     <button type="submit" class="btn btn-info" id="login">Login</button>
                 </div>
                 <div>
-                    <label style="position:absolute;top:370px">Don't remember your account?</label>
-                    <a style="position:absolute;top:370px;left:230px" href="/signup">Sign Up</a>
+                    <label style="position:absolute;top:470px">Don't remember your account?</label>
+                    &nbsp&nbsp
+                    <a style="position:absolute;top:470px;left:230px" href="/signup">Sign Up</a>
                  </div>
                 <br>
 				</div>

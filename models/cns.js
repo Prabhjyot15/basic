@@ -5,7 +5,10 @@ var mongoose = require("mongoose");
     from:String,
     image:String,
     text:String,
+    url:String,
+    file:String,
+    filename:String,
     createdAt:String
 });
  //CNSSchema.plugin(passportLocalMongoose)
- module.exports = mongoose.model("CNSChat", CNSSchema); 
+ module.exports = mongoose.model("CNSChat", CNSSchema);

@@ -7,14 +7,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
   <link rel="stylesheet" href="Log.css" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Courgette|Handlee|Philosopher|Permanent+Marker|Rock+Salt" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body >
+
+
   <div class="container">
+
       <div class="row">
           <div class="form_bg">
     <form action="/chat"  enctype="multipart/form-data">
       <div class="form-group">
+        <p id="dynamic"style="color:black;font-family:'Courgette', cursive"></p>
         <h3 class="text-center" style="color:black;font-family:'Courgette', cursive">Join a Group<h3>
       </div>
       <div class="form-field">
@@ -23,6 +28,9 @@
       <div class="form-field">
           <input  value="<%= typeof file != 'undefined' ? file : '' %>" name="image" type="hidden" >
         </div>
+        <div class="form-field">
+            <input  value="<%=email %>" name="email" id="email" type="hidden" >
+          </div>
 
       <div class="form-group">
         <label style="color:black;font-family:'Philosopher';font-size:20px">Display name</label>
@@ -45,3 +53,8 @@
 </body>
 
 </html>
+<script>
+$(document).ready(function(){
+$('#dynamic').append('Welcome '+$('#email').val()+' to the Join page!!!');
+});
+</script>

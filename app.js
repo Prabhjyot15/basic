@@ -1,5 +1,5 @@
 var express = require("express");
-
+var url = require('url');
 var fs = require('fs');
 var FileReader=require("filereader");
 var moment = require("moment");
@@ -72,7 +72,7 @@ passport.deserializeUser(User.deserializeUser());
 
 ));*/
 const dbName = 'myproject';
-mongoose.connect("mongodb://localhost:27017/ProjectApp", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/temp6", { useNewUrlParser: true });
 // Use connect method to connect to the server
 //MongoClient.connect(url, function(err, client) {
   //assert.equal(null, err);
@@ -198,13 +198,15 @@ app.post("/signup",function(req,res){
           res.render("index2",{
             username:user.username,
             file:`uploads/${user.imgname}`,
+            email:user.email,
             subject:subject.toUpperCase()
         });
         }
         else{
           res.render("index",{
             username:user.username,
-            file:`uploads/${user.imgname}`
+            file:`uploads/${user.imgname}`,
+            email:user.email
         })
         }
 
@@ -233,7 +235,8 @@ app.post("/signup",function(req,res){
               CNSChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
-                io.to("CNS").emit("chatHistory",docs)
+
+                io.to("CNS").emit("chatHistory",docs);
                 //console.log("Event emmited")
             });
             }
@@ -241,15 +244,15 @@ app.post("/signup",function(req,res){
               IOTChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
-                io.to("IOT").emit("chatHistory",docs)
-                //console.log("Event emmited")
+
+                io.to("IOT").emit("chatHistory",docs);
             });
             }
             else if(params.room==="ADMT"){
               ADMTChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
-                io.to("ADMT").emit("chatHistory",docs)
+                io.to("ADMT").emit("chatHistory",docs);
                 //console.log("Event emmited")
             });
             }
@@ -257,7 +260,7 @@ app.post("/signup",function(req,res){
               IPChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
-                io.to("IP").emit("chatHistory",docs)
+                io.to("IP").emit("chatHistory",docs);
                 //console.log("Event emmited")
             });
             }
@@ -274,7 +277,7 @@ app.post("/signup",function(req,res){
               io.to(user.room).emit('newMessage', generateMessage(user.name,user.image, message.text));
             }
             if(user.room==="CNS"){
-              var newMessage = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')}
+              var newMessage = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')}
             CNSChat.create(newMessage, function(err,msg){
                 if(err){
                     console.log(err);
@@ -285,12 +288,12 @@ app.post("/signup",function(req,res){
             });
             }
             else if(user.room==="IOT"){
-              var newMessage1 = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')}
+              var newMessage1 = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')}
             IOTChat.create(newMessage1, function(err,msg1){
                 if(err){
                     console.log(err);
                 } else {
-                  console.log(msg1);
+
                    msg1.save();
                    //res.redirect("/");
                 }
@@ -298,7 +301,7 @@ app.post("/signup",function(req,res){
             }
             else if(user.room==="ADMT")
             {
-              var newMessage2 = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')};
+              var newMessage2 = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')};
            //   console.log(newMessage2)
             ADMTChat.create(newMessage2, function(err,msg2){
                 if(err){
@@ -311,7 +314,7 @@ app.post("/signup",function(req,res){
             });
             }
             else{
-              var newMessage3 = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')}
+              var newMessage3 = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')}
             IPChat.create(newMessage3, function(err,msg3){
                 if(err){
                     console.log(err);
@@ -330,6 +333,54 @@ app.post("/signup",function(req,res){
             if (user) {
               io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name,user.image,coords.latitude, coords.longitude));
             }
+            if(user.room==="IOT"){
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+                   //res.redirect("/");
+                }
+            });
+            }
+            else if(user.room==="IP"){
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+                   //res.redirect("/");
+                }
+            });
+            }
+            else if(user.room==="ADMT"){
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+                   //res.redirect("/");
+                }
+            });
+            }
+            else{
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+                   //res.redirect("/");
+                }
+            });
+            }
           });var app=express();
 
           //socket.on('createFileMessage', (message) => {
@@ -343,7 +394,54 @@ app.post("/signup",function(req,res){
                     io.to(user.room).emit('newFileMessage', generateFileMessage(user.name,user.image,msg.file,msg.fileName));
 
                 };
-
+                if(user.room==="IOT"){
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+                       //res.redirect("/");
+                    }
+                });
+                }
+                else if(user.room==="IP"){
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+                       //res.redirect("/");
+                    }
+                });
+                }
+                else if(user.room==="ADMT"){
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+                       //res.redirect("/");
+                    }
+                });
+                }
+                else{
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+                       //res.redirect("/");
+                    }
+                });
+                }
             });
 
            // var reader = new FileReader();
