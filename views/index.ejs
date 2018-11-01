@@ -5,26 +5,53 @@
   <title>Join | ChatApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
+<<<<<<< HEAD
   <link rel="stylesheet" href="/stylesheets/Log.css" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|Courgette|Handlee|Philosopher|Permanent+Marker|Rock+Salt" rel="stylesheet">
 </head>
 
 <body >
   <div class="container">
+=======
+  <link rel="stylesheet" href="Log.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Courgette|Handlee|Philosopher|Permanent+Marker|Rock+Salt" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body >
+
+
+  <div class="container">
+
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
       <div class="row">
           <div class="form_bg">
     <form action="/chat"  enctype="multipart/form-data">
       <div class="form-group">
+<<<<<<< HEAD
           <p style="font-family:PT Sans Narrow;font-size: 20px">Welcome,<%=email%>!</p>
         <h3 class="text-center" style="padding-top:0px;color:black;font-family:'Courgette', cursive">Join a Group to Start Chatting!<h3>
       </div>
       <div class="form-field">
         <img src ="<%= typeof file != 'undefined' ? file : '' %>" class="img-responsive img-circle center-block" width="40%" height="20%"  max-heigh=40%;
         max-width=20%;>
+=======
+        <p id="dynamic"style="color:black;font-family:'Courgette', cursive"></p>
+        <h3 class="text-center" style="color:black;font-family:'Courgette', cursive">Join a Group<h3>
+      </div>
+      <div class="form-field">
+        <img class="center"style="padding-top:8px;padding-left:3px"src ="<%= typeof file != 'undefined' ? file : '' %>"  width="20%" height="20%">
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
       </div>
       <div class="form-field">
           <input  value="<%= typeof file != 'undefined' ? file : '' %>" name="image" type="hidden" >
         </div>
+<<<<<<< HEAD
+=======
+        <div class="form-field">
+            <input  value="<%=email %>" name="email" id="email" type="hidden" >
+          </div>
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 
       <div class="form-group">
         <label style="color:black;font-family:'Philosopher';font-size:20px">Display name</label>
@@ -33,7 +60,10 @@
       <div class="form-group">
         <label style="color:black;font-family:'Philosopher';font-size:20px">Select A Group</label>
         <select name="room" autofocus class="form-control">
+<<<<<<< HEAD
             <option class="form-control" style="color:black"value="IOT">Class Group</option>
+=======
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
           <option class="form-control" style="color:black"value="IOT">IOT</option>
           <option class="form-control" style="color:black"value="IP">Internet Programming</option>
           <option  class="form-control"style="color:black"value="ADMT">ADMT</option>
@@ -48,3 +78,11 @@
 </body>
 
 </html>
+<<<<<<< HEAD
+=======
+<script>
+$(document).ready(function(){
+$('#dynamic').append('Welcome '+$('#email').val()+' to the Join page!!!');
+});
+</script>
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e

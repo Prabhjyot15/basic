@@ -1,19 +1,29 @@
 body{
     background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/EVeDgMMCximbyooji/videoblocks-abstract-background-with-blue-molecule-structure-low-poly-4k-motion-graphics_shwtbi4_thumbnail-full01.png);
     background-size: cover;
+<<<<<<< HEAD
     background-repeat: repeat;
     /* height: 100%;
     width: 100%; */
+=======
+    background-repeat: no-repeat;
+    height: 800px;
+    width: 100%;
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 }
 
 .navbar-inverse {
     background-color: #2A383D;
 }
+<<<<<<< HEAD
 /* .container
 {
   width:500px;
   height: 535px;
 } */
+=======
+
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 .form_bg {
     background-color:#E1EEF2;
     color:#666;
@@ -22,16 +32,26 @@ body{
     position: absolute;
     border:2px solid black;
     margin: auto;
+<<<<<<< HEAD
     top:20px;
     right: 0;
     bottom: 0;
     left: 0;
     width:500px;
     height:535px;
+=======
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 }
 .align-center {
     text-align:center;
 }
+<<<<<<< HEAD
 .form-control{
   width:350px;
   margin: auto;
@@ -60,3 +80,18 @@ body{
     margin:auto;
   }
 }
+=======
+
+
+#A{
+    color:black;
+}
+a{
+    /*text-decoration:underline;*/
+}
+#bottom-align-text{
+    position:absolute;
+    bottom:0;
+    right:0
+}
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e

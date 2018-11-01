@@ -1,5 +1,9 @@
 var express = require("express");
+<<<<<<< HEAD
 var bcrypt =  require("bcrypt");
+=======
+var url = require('url');
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 var fs = require('fs');
 var FileReader=require("filereader");
 var moment = require("moment");
@@ -58,6 +62,7 @@ passport.use('local',new LocalStrategy(
         if (!user) {
           return done(null, false, { message: 'Incorrect username.' });
         }
+<<<<<<< HEAD
         if(!bcrypt.compareSync(password, user.password))
       {return done(null, false, { message: 'Incorrect password.' });
       }
@@ -65,6 +70,14 @@ passport.use('local',new LocalStrategy(
         return done(null, user);
         });
       }
+=======
+        if (user.password!=password) {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      });
+    }
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
   ));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -73,7 +86,11 @@ passport.deserializeUser(User.deserializeUser());
 
 ));*/
 const dbName = 'myproject';
+<<<<<<< HEAD
 mongoose.connect("mongodb://localhost:27017/ProjectApp1", { useNewUrlParser: true });
+=======
+mongoose.connect("mongodb://localhost:27017/temp6", { useNewUrlParser: true });
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 // Use connect method to connect to the server
 //MongoClient.connect(url, function(err, client) {
   //assert.equal(null, err);
@@ -107,7 +124,11 @@ const {isRealString} = require('./server/utils/validation');
 const {Users} = require('./server/utils/users');
 app.set("view engine","ejs");
 //mongoose.connect("mongodb://localhost:27017/ProjectApp");
+<<<<<<< HEAD
 app.use(express.static(__dirname + '/public'));
+=======
+app.use(express.static(__dirname + '/views'));
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 
 var User = require("./models/user.js");
 var ADMTChat = require("./models/admt");
@@ -121,11 +142,14 @@ app.get("/",function(req,res){
     res.render("home")
 
 });
+<<<<<<< HEAD
 app.get("/terms",function(req,res){
 
   res.render("terms")
 
 });
+=======
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 app.get("/login",function(req,res){
     res.render("login");
 });
@@ -135,14 +159,21 @@ app.get("/chat",function(req,res){
 app.get("/signup",function(req,res){
     res.render("signup");
 });
+<<<<<<< HEAD
 app.get("/thankyou",function(req,res){
   res.render("thankyou");
 });
+=======
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 app.get("/index",middleware.isLoggedIn,function(req,res){
     res.render("index");
 });
 
+<<<<<<< HEAD
 app.use(multer({ dest:__dirname + '/public/uploads/'}).any('image'));
+=======
+app.use(multer({ dest:__dirname + '/views/uploads/'}).any('image'));
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 app.post("/signup",function(req,res){
   User.find({ 'username': req.body.userid,'email':req.body.email }, function(err, user) {
 
@@ -173,6 +204,7 @@ app.post("/signup",function(req,res){
     console.log("Facultyy")
     var subject = req.body.subject;
     var password = req.body.pwd;
+<<<<<<< HEAD
     bcrypt.hash(password, 12)
     .then(function(hashedPassword) {
         var newUser = {username: username, email: email,isAdmin:isAdmin,subject:subject,imgname:imgname,password:hashedPassword}
@@ -220,6 +252,26 @@ else{
 
   }
   //var age = req.body.age;
+=======
+    var newUser = {username: username, email: email,isAdmin:isAdmin,subject:subject,imgname:imgname,password:password}
+  }
+  else{
+    var password = req.body.pwd;
+    var newUser = {username: username, email: email,isAdmin:isAdmin,imgname:imgname,password:password}
+  }
+  //var age = req.body.age;
+
+
+
+  User.create(newUser, function(err, user){
+      if(err){
+          console.log(err);
+      } else {
+         user.save();
+         res.redirect("/");
+      }
+  });
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 });
   });
   app.post(
@@ -236,15 +288,24 @@ else{
           res.render("index2",{
             username:user.username,
             file:`uploads/${user.imgname}`,
+<<<<<<< HEAD
             subject:subject.toUpperCase(),
             email:user.email,
+=======
+            email:user.email,
+            subject:subject.toUpperCase()
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
         });
         }
         else{
           res.render("index",{
             username:user.username,
             file:`uploads/${user.imgname}`,
+<<<<<<< HEAD
             email:user.email,
+=======
+            email:user.email
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
         })
         }
 
@@ -273,7 +334,12 @@ else{
               CNSChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
+<<<<<<< HEAD
                 io.to("CNS").emit("chatHistory",docs)
+=======
+
+                io.to("CNS").emit("chatHistory",docs);
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                 //console.log("Event emmited")
             });
             }
@@ -281,15 +347,24 @@ else{
               IOTChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
+<<<<<<< HEAD
                 io.to("IOT").emit("chatHistory",docs)
                 //console.log("Event emmited")
+=======
+
+                io.to("IOT").emit("chatHistory",docs);
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
             });
             }
             else if(params.room==="ADMT"){
               ADMTChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
+<<<<<<< HEAD
                 io.to("ADMT").emit("chatHistory",docs)
+=======
+                io.to("ADMT").emit("chatHistory",docs);
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                 //console.log("Event emmited")
             });
             }
@@ -297,23 +372,40 @@ else{
               IPChat.find({}.toArray,function(err,docs){
                 if (err)
                     console.log('error occured in the database');
+<<<<<<< HEAD
                 io.to("IP").emit("chatHistory",docs)
                 //console.log("Event emmited")
             });
             }
             socket.emit('newMessage', generateMessage('GroupChat', 'uploads/1cc462d02afc62a23915bb4b407b0895','Welcome to the chat app'));
             socket.broadcast.to(params.room).emit('newMessage', generateMessage('GroupChat','uploads/1cc462d02afc62a23915bb4b407b0895', `${params.name} has joined.`));
+=======
+                io.to("IP").emit("chatHistory",docs);
+                //console.log("Event emmited")
+            });
+            }
+            socket.emit('newMessage', generateMessage('Admin', 'uploads/1cc462d02afc62a23915bb4b407b0895','Welcome to the chat app'));
+            socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin','uploads/1cc462d02afc62a23915bb4b407b0895', `${params.name} has joined.`));
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
             callback();
           });
 
           socket.on('createMessage', (message, callback) => {
             var user = users.getUser(socket.id);
+<<<<<<< HEAD
+=======
+            console.log(user)
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
             if (user && isRealString(message.text)) {
 
               io.to(user.room).emit('newMessage', generateMessage(user.name,user.image, message.text));
             }
             if(user.room==="CNS"){
+<<<<<<< HEAD
               var newMessage = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')}
+=======
+              var newMessage = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')}
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
             CNSChat.create(newMessage, function(err,msg){
                 if(err){
                     console.log(err);
@@ -324,12 +416,20 @@ else{
             });
             }
             else if(user.room==="IOT"){
+<<<<<<< HEAD
               var newMessage1 = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')}
+=======
+              var newMessage1 = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')}
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
             IOTChat.create(newMessage1, function(err,msg1){
                 if(err){
                     console.log(err);
                 } else {
+<<<<<<< HEAD
                   console.log(msg1);
+=======
+
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                    msg1.save();
                    //res.redirect("/");
                 }
@@ -337,7 +437,11 @@ else{
             }
             else if(user.room==="ADMT")
             {
+<<<<<<< HEAD
               var newMessage2 = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')};
+=======
+              var newMessage2 = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')};
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
            //   console.log(newMessage2)
             ADMTChat.create(newMessage2, function(err,msg2){
                 if(err){
@@ -350,7 +454,11 @@ else{
             });
             }
             else{
+<<<<<<< HEAD
               var newMessage3 = {from:user.name,image:user.image,text:message.text,createdAt:moment(message.createdAt).format('h:mm a')}
+=======
+              var newMessage3 = {from:user.name,image:user.image,text:message.text,url:null,file:null,filename:null,createdAt:moment(message.createdAt).format('h:mm a')}
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
             IPChat.create(newMessage3, function(err,msg3){
                 if(err){
                     console.log(err);
@@ -369,6 +477,7 @@ else{
             if (user) {
               io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name,user.image,coords.latitude, coords.longitude));
             }
+<<<<<<< HEAD
             if(user.room==="CNS"){
               var newMessage = {from:user.name,image:user.image,url: `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,createdAt:moment(coords.createdAt).format('h:mm a')}
             CNSChat.create(newMessage, function(err,msg){
@@ -377,10 +486,21 @@ else{
                 } else {
                    msg.save();
                    console.log(msg);
+=======
+            if(user.room==="IOT"){
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                    //res.redirect("/");
                 }
             });
             }
+<<<<<<< HEAD
             else if(user.room=="IOT"){
               var newMessage = {from:user.name,image:user.image,url: `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,createdAt:moment(coords.createdAt).format('h:mm a')}
             IOTChat.create(newMessage, function(err,msg){
@@ -388,10 +508,21 @@ else{
                     console.log(err);
                 } else {
                    msg.save();
+=======
+            else if(user.room==="IP"){
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                    //res.redirect("/");
                 }
             });
             }
+<<<<<<< HEAD
             else if(user.room=="ADMT"){
               var newMessage = {from:user.name,image:user.image,url: `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,createdAt:moment(coords.createdAt).format('h:mm a')}
             ADMTChat.create(newMessage, function(err,msg){
@@ -399,11 +530,22 @@ else{
                     console.log(err);
                 } else {
                    msg.save();
+=======
+            else if(user.room==="ADMT"){
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                    //res.redirect("/");
                 }
             });
             }
             else{
+<<<<<<< HEAD
                 var newMessage = {from:user.name,image:user.image,url: `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,createdAt:moment(coords.createdAt).format('h:mm a')}
               IPChat.create(newMessage, function(err,msg){
                   if(err){
@@ -415,6 +557,19 @@ else{
               });
               }
 
+=======
+              var newMessage1 = {from:user.name,image:user.image,text:null,url:`https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`,file:null,filename:null,createdAt:moment(coords.createdAt).format('h:mm a')}
+            IOTChat.create(newMessage1, function(err,msg1){
+                if(err){
+                    console.log(err);
+                } else {
+                  console.log(msg1);
+                   msg1.save();
+                   //res.redirect("/");
+                }
+            });
+            }
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
           });var app=express();
 
           //socket.on('createFileMessage', (message) => {
@@ -428,6 +583,7 @@ else{
                     io.to(user.room).emit('newFileMessage', generateFileMessage(user.name,user.image,msg.file,msg.fileName));
 
                 };
+<<<<<<< HEAD
                 if(user.room==="CNS"){
                   var newMessage = {from:user.name,image:user.image,file:msg.file,fileName:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
                 CNSChat.create(newMessage, function(err,msg){
@@ -435,10 +591,21 @@ else{
                         console.log(err);
                     } else {
                        msg.save();
+=======
+                if(user.room==="IOT"){
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                        //res.redirect("/");
                     }
                 });
                 }
+<<<<<<< HEAD
                 else if(user.room=="IOT"){
                   var newMessage = {from:user.name,image:user.image,file:msg.file,fileName:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
                 IOTChat.create(newMessage, function(err,msg){
@@ -446,10 +613,21 @@ else{
                         console.log(err);
                     } else {
                        msg.save();
+=======
+                else if(user.room==="IP"){
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                        //res.redirect("/");
                     }
                 });
                 }
+<<<<<<< HEAD
                 else if(user.room=="ADMT"){
                   var newMessage = {from:user.name,image:user.image,file:msg.file,fileName:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
                 ADMTChat.create(newMessage, function(err,msg){
@@ -457,11 +635,22 @@ else{
                         console.log(err);
                     } else {
                        msg.save();
+=======
+                else if(user.room==="ADMT"){
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
                        //res.redirect("/");
                     }
                 });
                 }
                 else{
+<<<<<<< HEAD
                     var newMessage = {from:user.name,image:user.image,file:msg.file,fileName:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
                   IPChat.create(newMessage, function(err,msg){
                       if(err){
@@ -472,6 +661,19 @@ else{
                       }
                   });
                   }
+=======
+                  var newMessage1 = {from:user.name,image:user.image,text:null,url:null,file:msg.file,filename:msg.fileName,createdAt:moment(msg.createdAt).format('h:mm a')}
+                IOTChat.create(newMessage1, function(err,msg1){
+                    if(err){
+                        console.log(err);
+                    } else {
+                      console.log(msg1);
+                       msg1.save();
+                       //res.redirect("/");
+                    }
+                });
+                }
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
             });
 
            // var reader = new FileReader();

@@ -1,10 +1,16 @@
 var expect = require('expect');
+<<<<<<< HEAD
 var describe=require("describe");
+=======
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 
 var {generateMessage, generateLocationMessage} = require('./message');
 
 describe('generateMessage', () => {
+<<<<<<< HEAD
   console.log("reached");
+=======
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
   it('should generate correct message object', () => {
     var from = 'Jen';
     var text = 'Some message';

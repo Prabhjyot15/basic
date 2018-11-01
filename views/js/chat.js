@@ -17,10 +17,7 @@ function scrollToBottom () {
 
 socket.on('connect', function () {
   var params = jQuery.deparam(window.location.search);
-<<<<<<< HEAD
-=======
   console.log("+++")
->>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 
   socket.emit('join', params, function (err) {
     if (err) {
@@ -31,33 +28,34 @@ socket.on('connect', function () {
     }
   });
 });
+
+
 socket.on('chatHistory',function(data){
   //console.log("REACHED CHAT HISTORY")
-<<<<<<< HEAD
   var template;
   //console.log(data)
   data.forEach(function (arrayItem) {
     if(arrayItem.url)
-    { template = jQuery('#message-template1').html();
+    { template = jQuery('#location-message-template').html();
       var html = Mustache.render(template, {
         from: arrayItem.from,
         image:arrayItem.image,
         url:arrayItem.url,
         createdAt:arrayItem.createdAt
-        
+
         // createdAt: formattedTime
        })
     }
     if(arrayItem.file)
     {
-       template = jQuery('#message-template2').html();
+       template = jQuery('#file-message-template').html();
       var html = Mustache.render(template, {
         from: arrayItem.from,
         image:arrayItem.image,
         file:arrayItem.file,
-        fileName:arrayItem.fileName,
+        fileName:arrayItem.filename,
         createdAt:arrayItem.createdAt
-        
+
         // createdAt: formattedTime
        })
     }
@@ -68,38 +66,18 @@ socket.on('chatHistory',function(data){
         image:arrayItem.image,
         text:arrayItem.text,
         createdAt:arrayItem.createdAt
-        
+
         // createdAt: formattedTime
        })
     }
     //console.log(arrayItem.from)
-    
-=======
-  var template = jQuery('#message-template').html();
-  //console.log(data)
-  data.forEach(function (arrayItem) {
-    //console.log(arrayItem)
-    //console.log(arrayItem.from)
-    //console.log(arrayItem.text)
-    var html = Mustache.render(template, {
-      
-      from: arrayItem.from,
-      image:arrayItem.image,
-      text: arrayItem.text,
-      createdAt:arrayItem.createdAt
-      
-      // createdAt: formattedTime
-     })
->>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
+
     jQuery('#messages').append(html);
     scrollToBottom();
  })
-  
+
 });
 
-socket.on('disconnect', function () {
-  console.log('Disconnected from server');
-});
 
 socket.on('updateUserList', function (users) {
   var ol = jQuery('<ol></ol>');
@@ -112,11 +90,7 @@ socket.on('updateUserList', function (users) {
 });
 
 socket.on('newMessage', function (message) {
-<<<<<<< HEAD
- console.log(message);
-=======
   //console.log("Reached newMessage")
->>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
   var formattedTime = moment(message.createdAt).format('h:mm a');
   var template = jQuery('#message-template').html();
   var html = Mustache.render(template, {
@@ -196,7 +170,7 @@ locationButton.on('click', function () {
 });
 
 $('input[type="file"]').change(function(e){
-  
+
  // var fileName = document.forms["form"]["add-file"].files[0]
   //console.log('The file "' + fileName +  '" has been selected.');
   //console.log(file)
@@ -205,9 +179,9 @@ $('input[type="file"]').change(function(e){
  // $('#add-file').on('change', function(e){
     var data = e.originalEvent.target.files[0];
     console.log("reached")
-    readThenSendFile(data);      
+    readThenSendFile(data);
   });
-  
+
   function readThenSendFile(data){
    console.log(data)
     var reader = new FileReader();

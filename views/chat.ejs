@@ -5,6 +5,7 @@
 <head>
   <meta charset="utf-8">
   <title>Chat | ChatApp</title>
+<<<<<<< HEAD
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Domine" rel="stylesheet">
@@ -12,12 +13,17 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="/stylesheets/styles.css">
+=======
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="styles.css">
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 
 </head>
 
 <body class="chat">
 
   <div class="chat__sidebar">
+<<<<<<< HEAD
       <a href="/logout"  class="btn btn-danger center-block" style="font-family:Domine" >LOGOUT</a>
     <h3 style="">Active Users</h3>
     <div id="users" style="font-size:40px"></div>
@@ -25,14 +31,29 @@
 
   <div class="chat__main">
 
+=======
+    <h3>People</h3>
+    <div id="users"></div>
+  </div>
+
+  <div class="chat__main">
+      <a href="/logout" style="margin-right: 20px" class="button" >Logout</a>
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
     <ol id="messages" class="chat__messages"></ol>
 
     <div class="chat__footer">
       <form id="message-form" name="form">
+<<<<<<< HEAD
         <input name="message" type="text" placeholder="Enter A Message..." autofocus autocomplete="off"/>
         <button class="btn btn-primary" >Send</button>
       <button id="send-location" class="btn btn-primary" >Send location</button> &nbsp
       <label  style="padding:10px" class="btn btn-primary"> Add File
+=======
+        <input name="message" type="text" placeholder="Message" autofocus autocomplete="off"/>
+        <button >Send</button>
+      <button id="send-location" >Send location</button> &nbsp &nbsp
+      <label  style="padding:10px;background:#176078"> Add File
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
       <input id="#add-file" type="file" name="add-file" size="60" style="display:none">
       </label>
       </form>
@@ -42,6 +63,7 @@
   <script id="message-template" type="text/template">
     <li class="message">
       <div class="message__title">
+<<<<<<< HEAD
         <img src="{{image}}" class="img-circle" width=50px height=50px>
        &nbsp <h4>{{from}}</h4>
         <span class="time">{{createdAt}}</span>
@@ -83,12 +105,33 @@
     <li class="message">
       <div class="message__title">
           <img src="{{image}}" width=50px height=50px>
+=======
+        <img src="{{image}}" width=3% height=30%>
+        <h4>{{from}}</h4>
+        <span>{{createdAt}}</span>
+      </div>
+      <div class="message__body">
+        <p id="a">{{text}}</p>
+      </div>
+
+    </li>
+  </script>
+
+  <script id="location-message-template" type="text/template">
+    <li class="message">
+      <div class="message__title">
+          <img src="{{image}}" width=3% height=30%>
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
         <h4>{{from}}</h4>
         <span>{{createdAt}}</span>
       </div>
       <div class="message__body">
         <p>
+<<<<<<< HEAD
           <a href="{{url}}" target="_blank"><h5>My current location</h5></a>
+=======
+          <a href="{{url}}" target="_blank">My current location</a>
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
         </p>
       </div>
     </li>
@@ -97,7 +140,11 @@
   <script id="file-message-template" type="text/template">
     <li class="message">
       <div class="message__title">
+<<<<<<< HEAD
           <img src="{{image}}" width=50px height=50px>
+=======
+          <img src="{{image}}" width=3% height=30%>
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
         <h4>{{from}}</h4>
         <span>{{createdAt}}</span>
       </div>
@@ -115,6 +162,10 @@
   <script src="/js/libs/mustache.js"></script>
   <script src="/js/libs/deparam.js"></script>
   <script src="/js/chat.js"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5d7d634ca1fe544467358994d522aa1afc9a754e
 </body>
 
 </html>
